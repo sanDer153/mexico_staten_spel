@@ -59,16 +59,16 @@
   justify-content: center;
 }
 
-.map-state:hover {
-  fill: #555555;
-}
-
 .map-state.aztec {
   fill: #d66209;
 }
 
 .map-state.maya {
   fill: #498c01;
+}
+
+.map-state:hover {
+  fill: #555555;
 }
 
 .map-state.selected {
@@ -79,7 +79,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5em;
 }
 
 .map-info__info {
@@ -93,6 +93,25 @@
 .map-info__info-tag {
   display: flex;
   justify-content: space-between;
+}
+
+.map-info__faction-selector-container {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: #e5e5e5;
+  display: flex;
+  flex-direction: row;
+}
+
+.map-info__faction-selector-option {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 1rem;
+}
+
+.map-info__faction-selector-option.selected {
+  background-color: #cccccc;
 }
 
 .lower {

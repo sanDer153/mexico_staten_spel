@@ -1,5 +1,4 @@
 const resources = ["Hout", "Graan", "Steen", "Kippen", "Goud"];
-const factions = ["Maya's", "Azteken"];
 
 const currentMapState = {
   "baja-california": {
@@ -170,11 +169,32 @@ function removeSelectedState() {
       element.classList.remove("selected");
     }
   );
+  document.getElementById("map-info__title").innerHTML = "";
+  document.getElementById("map-info__faction").innerHTML = "None";
+  document.getElementById("map-info__resource").innerHTML = "None";
+  document
+    .getElementById("map-info__maya-selector")
+    .classList.remove("selected");
+  document
+    .getElementById("map-info__aztec-selector")
+    .classList.remove("selected");
 }
 
 function stateClicked(id) {
   removeSelectedState();
   document.getElementById(id).classList.add("selected");
+  updateMapInfoModule(id);
+}
+
+function factionSelectorClicked(faction) {
+  let name = document.getElementById("map-info__title").innerHTML;
+  const id = name.replace(" ", "-").replace(" ", "-").toLowerCase();
+
+  document.getElementById(id).classList.remove("maya");
+  document.getElementById(id).classList.remove("aztec");
+  document.getElementById(id).classList.add(faction.toLowerCase());
+  currentMapState[id].faction = faction;
+  removeSelectedState();
   updateMapInfoModule(id);
 }
 
@@ -185,4 +205,13 @@ function updateMapInfoModule(id) {
     currentMapState[id].faction;
   document.getElementById("map-info__resource").innerHTML =
     currentMapState[id].resource;
+  if (currentMapState[id].faction === "Maya") {
+    document
+      .getElementById("map-info__maya-selector")
+      .classList.add("selected");
+  } else if (currentMapState[id].faction === "Aztec") {
+    document
+      .getElementById("map-info__aztec-selector")
+      .classList.add("selected");
+  }
 }
