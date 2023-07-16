@@ -270,3 +270,27 @@ function updateMapInfoModule(stateId) {
       .classList.add("selected");
   }
 }
+
+function reloadResourceBank() {
+  document.getElementById("bank__m-hout").innerHTML = bank["maya's"].hout;
+  document.getElementById("bank__m-graan").innerHTML = bank["maya's"].graan;
+  document.getElementById("bank__m-steen").innerHTML = bank["maya's"].steen;
+  document.getElementById("bank__m-kippen").innerHTML = bank["maya's"].kippen;
+  document.getElementById("bank__m-goud").innerHTML = bank["maya's"].goud;
+  document.getElementById("bank__a-hout").innerHTML = bank["azteken"].hout;
+  document.getElementById("bank__a-graan").innerHTML = bank["azteken"].graan;
+  document.getElementById("bank__a-steen").innerHTML = bank["azteken"].steen;
+  document.getElementById("bank__a-kippen").innerHTML = bank["azteken"].kippen;
+  document.getElementById("bank__a-goud").innerHTML = bank["azteken"].goud;
+}
+
+function incrementResource(faction, resource) {
+  bank[faction][resource] += 1;
+  reloadResourceBank();
+}
+
+function decrementResource(faction, resource) {
+  if (bank[faction][resource] <= 0) return;
+  bank[faction][resource] -= 1;
+  reloadResourceBank();
+}
