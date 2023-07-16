@@ -163,12 +163,52 @@ const currentMapState = {
   },
 };
 
+const bank = {
+  "maya's": {
+    hout: 0,
+    graan: 0,
+    steen: 0,
+    kippen: 0,
+    goud: 0,
+  },
+  azteken: {
+    hout: 0,
+    graan: 0,
+    steen: 0,
+    kippen: 0,
+    goud: 0,
+  },
+};
+
+function capitalized(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// Get the faction of a certain state
+function getFaction(stateId) {
+  return currentMapState[stateId].faction;
+}
+
+// Set the faction of a certain state
+function setFaction(stateId, faction) {
+  // Faction === "maya's" or "azteken"
+  if (faction !== "maya's" && faction !== "azteken") return;
+  currentMapState[stateId].faction = faction;
+  updateMap(stateId, faction);
+}
+
+// Remove the blue highlight from the selected state and clear map info module
 function removeSelectedState() {
   Array.from(document.getElementsByClassName("map-state")).forEach(
     (element) => {
       element.classList.remove("selected");
     }
   );
+  clearMapInfoModule();
+}
+
+// Clear the info in the map info module
+function clearMapInfoModule() {
   document.getElementById("map-info__title").innerHTML = "";
   document.getElementById("map-info__faction").innerHTML = "None";
   document.getElementById("map-info__resource").innerHTML = "None";
@@ -180,36 +220,51 @@ function removeSelectedState() {
     .classList.remove("selected");
 }
 
-function stateClicked(id) {
+// Fires when a state is clicked: set blue highlight and load map info module
+function stateClicked(stateId) {
   removeSelectedState();
-  document.getElementById(id).classList.add("selected");
-  updateMapInfoModule(id);
+  document.getElementById(stateId).classList.add("selected");
+  updateMapInfoModule(stateId);
 }
 
+// Fires when option in faction selector is clicked: update faction of that state
 function factionSelectorClicked(faction) {
   let name = document.getElementById("map-info__title").innerHTML;
-  const id = name.replace(" ", "-").replace(" ", "-").toLowerCase();
+  if (name === "") return;
+  const id = name.replaceAll(" ", "-").toLowerCase();
 
-  document.getElementById(id).classList.remove("maya");
-  document.getElementById(id).classList.remove("aztec");
-  document.getElementById(id).classList.add(faction.toLowerCase());
   currentMapState[id].faction = faction;
-  removeSelectedState();
+  updateMap(id, faction);
+  clearMapInfoModule();
   updateMapInfoModule(id);
 }
 
-function updateMapInfoModule(id) {
+// Update the mapcolor of a certain state
+function updateMap(stateId, faction) {
+  document.getElementById(stateId).classList.remove("maya");
+  document.getElementById(stateId).classList.remove("aztec");
+  if (faction === "maya's") {
+    document.getElementById(stateId).classList.add("maya");
+  } else if (faction === "azteken") {
+    document.getElementById(stateId).classList.add("aztec");
+  }
+}
+
+// Update de info in the map info module
+function updateMapInfoModule(stateId) {
   document.getElementById("map-info__title").innerHTML =
-    currentMapState[id].name;
-  document.getElementById("map-info__faction").innerHTML =
-    currentMapState[id].faction;
-  document.getElementById("map-info__resource").innerHTML =
-    currentMapState[id].resource;
-  if (currentMapState[id].faction === "Maya") {
+    currentMapState[stateId].name;
+  document.getElementById("map-info__faction").innerHTML = capitalized(
+    currentMapState[stateId].faction
+  );
+  document.getElementById("map-info__resource").innerHTML = capitalized(
+    currentMapState[stateId].resource
+  );
+  if (currentMapState[stateId].faction === "maya's") {
     document
       .getElementById("map-info__maya-selector")
       .classList.add("selected");
-  } else if (currentMapState[id].faction === "Aztec") {
+  } else if (currentMapState[stateId].faction === "azteken") {
     document
       .getElementById("map-info__aztec-selector")
       .classList.add("selected");

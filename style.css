@@ -34,10 +34,6 @@
 }
 
 .title-2 {
-  color: #aaaaaa;
-}
-
-.title-3 {
   color: #d66209;
 }
 
@@ -50,6 +46,52 @@
 
 .left {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.bank__container {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background-color: #e5e5e5;
+  display: grid;
+  column-gap: 0.5rem;
+  grid-template-areas:
+    ". m-header a-header"
+    "hout m-hout a-hout"
+    "graan m-graan a-graan"
+    "steen m-steen a-steen"
+    "kippen m-kippen a-kippen"
+    "goud m-goud a-goud"
+    ". m-footer a-footer";
+}
+
+.bank__m,
+.bank__a {
+  border-left: 2px solid;
+  border-right: 2px solid;
+  text-align: center;
+  font-weight: 600;
+}
+
+.bank__header {
+  border-top: 2px solid;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.bank__footer {
+  height: 0.5rem;
+  border-bottom: 2px solid;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.bank__m {
+  border-color: #498c01;
+}
+
+.bank__a {
+  border-color: #d66209;
 }
 
 .center {
@@ -108,6 +150,7 @@
   text-align: center;
   font-weight: 600;
   border-radius: 1rem;
+  cursor: pointer;
 }
 
 .map-info__faction-selector-option.selected {
