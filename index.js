@@ -1,5 +1,8 @@
 const currentMapState = initialMapState;
 
+let timerRunning = false;
+let timerStart;
+
 const bank = {
   "maya's": {
     hout: 0,
@@ -134,3 +137,40 @@ function decrementResource(faction, resource) {
   bank[faction][resource] -= 1;
   reloadResourceBank();
 }
+
+function toggleTimer() {
+  if (timerRunning) {
+    timerRunning = false;
+    document.getElementById("timer__toggle-btn").innerHTML = "Start";
+  } else {
+    timerRunning = true;
+    timerStart = new Date().getTime();
+    document.getElementById("timer__toggle-btn").innerHTML = "Stop";
+
+    let timer = setInterval(function () {
+      let now = new Date().getTime();
+      let distance = now - timerStart;
+      if (distance >= timeBetweenTurns) {
+        timerStart = now;
+        distance = 0;
+        turn();
+      }
+      let timeToNextTurn = timeBetweenTurns - distance;
+
+      let minutes = Math.floor(timeToNextTurn / (1000 * 60));
+      let seconds = Math.floor((timeToNextTurn % (1000 * 60)) / 1000);
+
+      formattedSeconds = ("0" + seconds).slice(-2); //Puts 0 in front if seconds is 1 digit
+
+      document.getElementById(
+        "timer"
+      ).innerHTML = `${minutes}:${formattedSeconds}`;
+
+      if (!timerRunning) {
+        clearInterval(timer);
+      }
+    }, 500);
+  }
+}
+
+function turn() {}

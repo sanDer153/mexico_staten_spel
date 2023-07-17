@@ -22,6 +22,28 @@
   border-radius: 2rem;
 }
 
+.btn {
+  padding: 0.5rem;
+  border-radius: 5rem;
+  text-align: center;
+  background-color: #cccccc;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #aaaaaa;
+}
+
+.btn-blue {
+  color: white;
+  background-color: darkcyan;
+}
+
+.btn-blue:hover {
+  background-color: #006969;
+}
+
 .navbar {
   width: 100vw;
 }
@@ -112,6 +134,12 @@
 
 .bank__resource-btn:hover {
   background-color: #aaaaaa;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .timer__timer {
