@@ -1,14 +1,14 @@
 function checkInitialMapState() {
-  for (const state in initialMapState) {
-    if (!resources.includes(initialMapState[state].resource)) {
+  for (const stateId in initialMapState) {
+    if (!resources.includes(initialMapState[stateId].resource)) {
       console.log(
-        `ERROR: ${state} has an unknown resource '${initialMapState[state].resource}' assigned.`
+        `ERROR: ${stateId} has an unknown resource '${initialMapState[stateId].resource}' assigned.`
       );
       return;
     }
-    if (!factions.includes(initialMapState[state].faction)) {
+    if (!factions.includes(initialMapState[stateId].faction)) {
       console.log(
-        `ERROR: ${state} has an unknown faction '${initialMapState[state].faction}' assigned.`
+        `ERROR: ${stateId} has an unknown faction '${initialMapState[stateId].faction}' assigned.`
       );
       return;
     }

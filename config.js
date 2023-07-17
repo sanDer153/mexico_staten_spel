@@ -2,7 +2,7 @@ const resources = ["hout", "graan", "steen", "kippen", "goud"];
 const factions = ["none", "maya's", "azteken"];
 
 // time in millis --> 5min = 300000
-const timeBetweenTurns = 30000;
+const timeBetweenTurns = 10000;
 
 const initialMapState = {
   "baja-california": {

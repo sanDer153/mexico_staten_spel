@@ -173,4 +173,16 @@ function toggleTimer() {
   }
 }
 
-function turn() {}
+function turn() {
+  distributeResources();
+}
+
+function distributeResources() {
+  for (const stateId in currentMapState) {
+    const faction = currentMapState[stateId].faction;
+    const resource = currentMapState[stateId].resource;
+
+    if (faction !== "none") bank[faction][resource] += 1;
+  }
+  reloadResourceBank();
+}
