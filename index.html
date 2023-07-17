@@ -188,18 +188,22 @@
             <div class="bank__footer bank__m" style="grid-area: m-footer"></div>
             <div class="bank__footer bank__a" style="grid-area: a-footer"></div>
           </div>
+          <div class="timer">
+            <p>Tijd tot volgende ronde:</p>
+            <h1 class="timer__timer" id="timer">2:26</h1>
+          </div>
         </div>
         <div class="center module" onclick="removeSelectedState()">
           <svg
             baseprofile="tiny"
             fill="#aaaaaa"
-            height="631"
             stroke="#f5f5f5"
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
             version="1.2"
             viewbox="0 0 1000 631"
+            height="100%"
             width="100%"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -438,7 +442,7 @@
           </svg>
         </div>
         <div class="right module">
-          <h2 id="map-info__title"></h2>
+          <h2 id="map-info__title">Selecteer een staat</h2>
           <div class="map-info__info">
             <div class="map-info__info-tag">
               <span>Factie:</span>
@@ -474,10 +478,13 @@
       </div>
       <div class="divider"></div>
       <div class="lower">
-        <div class="timer module"></div>
+        <div class="actions module"></div>
         <div class="techtree module"></div>
       </div>
+      <div class="divider"></div>
     </div>
+    <script src="config.js"></script>
+    <script src="checkConfig.js"></script>
     <script src="index.js"></script>
   </body>
 </html>

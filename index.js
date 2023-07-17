@@ -1,167 +1,4 @@
-const resources = ["Hout", "Graan", "Steen", "Kippen", "Goud"];
-
-const currentMapState = {
-  "baja-california": {
-    name: "Baja California",
-    faction: "None",
-    resource: "None",
-  },
-  "baja-california-sur": {
-    name: "Baja California Sur",
-    faction: "None",
-    resource: "None",
-  },
-  coahuila: {
-    name: "Coahuila",
-    faction: "None",
-    resource: "None",
-  },
-  chihuahua: {
-    name: "Chihuahua",
-    faction: "None",
-    resource: "None",
-  },
-  durango: {
-    name: "Durango",
-    faction: "None",
-    resource: "None",
-  },
-  sinaloa: {
-    name: "Sinaloa",
-    faction: "None",
-    resource: "None",
-  },
-  sonora: {
-    name: "Sonora",
-    faction: "None",
-    resource: "None",
-  },
-  zacatecas: {
-    name: "Zacatecas",
-    faction: "None",
-    resource: "None",
-  },
-  "nuevo-león": {
-    name: "Nuevo León",
-    faction: "None",
-    resource: "None",
-  },
-  "san-luis-potosí": {
-    name: "San Luis Potosí",
-    faction: "None",
-    resource: "None",
-  },
-  tamaulipas: {
-    name: "Tamaulipas",
-    faction: "None",
-    resource: "None",
-  },
-  aguascalientes: {
-    name: "Aguascalientes",
-    faction: "None",
-    resource: "None",
-  },
-  colima: {
-    name: "Colima",
-    faction: "None",
-    resource: "None",
-  },
-  jalisco: {
-    name: "Jalisco",
-    faction: "None",
-    resource: "None",
-  },
-  michoacán: {
-    name: "Michoacán",
-    faction: "None",
-    resource: "None",
-  },
-  nayarit: {
-    name: "Nayarit",
-    faction: "None",
-    resource: "None",
-  },
-  campeche: {
-    name: "Campeche",
-    faction: "None",
-    resource: "None",
-  },
-  oaxaca: {
-    name: "Oaxaca",
-    faction: "None",
-    resource: "None",
-  },
-  puebla: {
-    name: "Puebla",
-    faction: "None",
-    resource: "None",
-  },
-  tabasco: {
-    name: "Tabasco",
-    faction: "None",
-    resource: "None",
-  },
-  tlaxcala: {
-    name: "Tlaxcala",
-    faction: "None",
-    resource: "None",
-  },
-  "distrito-federal": {
-    name: "Distrito Federal",
-    faction: "None",
-    resource: "None",
-  },
-  guanajuato: {
-    name: "Guanajuato",
-    faction: "None",
-    resource: "None",
-  },
-  guerrero: {
-    name: "Guerrero",
-    faction: "None",
-    resource: "None",
-  },
-  hidalgo: {
-    name: "Hidalgo",
-    faction: "None",
-    resource: "None",
-  },
-  méxico: {
-    name: "México",
-    faction: "None",
-    resource: "None",
-  },
-  morelos: {
-    name: "Morelos",
-    faction: "None",
-    resource: "None",
-  },
-  querétaro: {
-    name: "Querétaro",
-    faction: "None",
-    resource: "None",
-  },
-  veracruz: {
-    name: "Veracruz",
-    faction: "None",
-    resource: "None",
-  },
-  chiapas: {
-    name: "Chiapas",
-    faction: "None",
-    resource: "None",
-  },
-  "quintana-roo": {
-    name: "Quintana Roo",
-    faction: "None",
-    resource: "None",
-  },
-  yucatán: {
-    name: "Yucatán",
-    faction: "None",
-    resource: "None",
-  },
-};
+const currentMapState = initialMapState;
 
 const bank = {
   "maya's": {
@@ -209,7 +46,7 @@ function removeSelectedState() {
 
 // Clear the info in the map info module
 function clearMapInfoModule() {
-  document.getElementById("map-info__title").innerHTML = "";
+  document.getElementById("map-info__title").innerHTML = "Selecteer een staat";
   document.getElementById("map-info__faction").innerHTML = "None";
   document.getElementById("map-info__resource").innerHTML = "None";
   document
@@ -230,7 +67,7 @@ function stateClicked(stateId) {
 // Fires when option in faction selector is clicked: update faction of that state
 function factionSelectorClicked(faction) {
   let name = document.getElementById("map-info__title").innerHTML;
-  if (name === "") return;
+  if (name === "Selecteer een staat") return;
   const id = name.replaceAll(" ", "-").toLowerCase();
 
   currentMapState[id].faction = faction;
@@ -271,6 +108,7 @@ function updateMapInfoModule(stateId) {
   }
 }
 
+// reload the ui for the resourcebank
 function reloadResourceBank() {
   document.getElementById("bank__m-hout").innerHTML = bank["maya's"].hout;
   document.getElementById("bank__m-graan").innerHTML = bank["maya's"].graan;
@@ -284,11 +122,13 @@ function reloadResourceBank() {
   document.getElementById("bank__a-goud").innerHTML = bank["azteken"].goud;
 }
 
+// add one to a certain resource in the bank
 function incrementResource(faction, resource) {
   bank[faction][resource] += 1;
   reloadResourceBank();
 }
 
+// remove one from a certain resource in the bank
 function decrementResource(faction, resource) {
   if (bank[faction][resource] <= 0) return;
   bank[faction][resource] -= 1;

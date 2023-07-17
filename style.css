@@ -9,6 +9,7 @@
 .page {
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .divider {
@@ -113,6 +114,10 @@
   background-color: #aaaaaa;
 }
 
+.timer__timer {
+  font-size: 3rem;
+}
+
 .center {
   flex: 2;
   display: flex;
@@ -177,13 +182,14 @@
 }
 
 .lower {
+  flex-grow: 1;
   display: flex;
   flex-direction: row;
   padding: 0 2rem;
   gap: 2rem;
 }
 
-.timer {
+.actions {
   flex: 1;
 }
 
