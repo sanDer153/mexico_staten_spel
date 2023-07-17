@@ -4,6 +4,7 @@
   font-family: Poppins, sans-serif;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .page {
@@ -46,9 +47,10 @@
 
 .navbar {
   width: 100vw;
-}
-
-.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem 2rem;
 }
 
@@ -58,6 +60,22 @@
 
 .title-2 {
   color: #d66209;
+}
+
+.statecount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  border: 2px solid #e5e5e5;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.statecount__counters {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
 
 .main {

@@ -1,5 +1,8 @@
 const currentMapState = initialMapState;
 
+let mayaStatecount = 0;
+let aztecStatecount = 0;
+
 let timerRunning = false;
 let timerStart;
 
@@ -35,6 +38,7 @@ function setFaction(stateId, faction) {
   if (faction !== "maya's" && faction !== "azteken") return;
   currentMapState[stateId].faction = faction;
   updateMap(stateId, faction);
+  reloadStatecounters();
 }
 
 // Remove the blue highlight from the selected state and clear map info module
@@ -77,6 +81,7 @@ function factionSelectorClicked(faction) {
   updateMap(id, faction);
   clearMapInfoModule();
   updateMapInfoModule(id);
+  reloadStatecounters();
 }
 
 // Update the mapcolor of a certain state
@@ -186,3 +191,22 @@ function distributeResources() {
   }
   reloadResourceBank();
 }
+
+function reloadStatecounters() {
+  mayaStatecount = 0;
+  aztecStatecount = 0;
+  for (const stateId in currentMapState) {
+    const faction = currentMapState[stateId].faction;
+    if (faction === "maya's") mayaStatecount += 1;
+    if (faction === "azteken") aztecStatecount += 1;
+  }
+
+  document.getElementById("m-statecount").innerHTML = `${mayaStatecount}`;
+  document.getElementById("a-statecount").innerHTML = `${aztecStatecount}`;
+}
+
+function init() {
+  reloadStatecounters();
+}
+
+init();
