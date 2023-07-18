@@ -4,6 +4,49 @@ const factions = ["none", "maya's", "azteken"];
 // time in millis --> 5min = 300000
 const timeBetweenTurns = 10000;
 
+// Config voor politieke technologie boom
+// 0 : Standaard niveau bij het begin al geactiveerd
+// text: tekst zichtbaar in de boom
+// friendlyReferendumChance: de kans op referendum succes
+// enemyReferendumModifier: wordt afgetrokken van de succeskans van het andere team
+const polTechtree = {
+  0: {
+    text: "",
+    friendlyReferendumChance: 0.1,
+    enemyReferendumModifier: 0,
+  },
+  1: {
+    text: "Niveau 1",
+    friendlyReferendumChance: 0.15,
+    enemyReferendumModifier: 0.025,
+  },
+  2: {
+    text: "Niveau 2",
+    friendlyReferendumChance: 0.25,
+    enemyReferendumModifier: 0.05,
+  },
+  3: {
+    text: "Niveau 3",
+    friendlyReferendumChance: 0.35,
+    enemyReferendumModifier: 0.1,
+  },
+  3: {
+    text: "Niveau 3",
+    friendlyReferendumChance: 0.4,
+    enemyReferendumModifier: 0.15,
+  },
+  4: {
+    text: "Niveau 4",
+    friendlyReferendumChance: 0.45,
+    enemyReferendumModifier: 0.2,
+  },
+  5: {
+    text: "Niveau 5",
+    friendlyReferendumChance: 0.5,
+    enemyReferendumModifier: 0.25,
+  },
+};
+
 const initialMapState = {
   "baja-california": {
     name: "Baja California",

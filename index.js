@@ -6,6 +6,11 @@ let aztecStatecount = 0;
 let timerRunning = false;
 let timerStart;
 
+const maxTechtreeLevel =
+  Object.keys(polTechtree)[Object.keys(polTechtree).length - 1];
+let mayaTechtreeLevel = 0;
+let aztecTechtreeLevel = 0;
+
 const bank = {
   "maya's": {
     hout: 0,
@@ -205,8 +210,66 @@ function reloadStatecounters() {
   document.getElementById("a-statecount").innerHTML = `${aztecStatecount}`;
 }
 
+function setTechLevel(faction, level) {
+  if (level >= 0 && level <= maxTechtreeLevel) {
+    if (faction === "maya") mayaTechtreeLevel = level;
+    if (faction === "aztec") aztecTechtreeLevel = level;
+  }
+  updateTechtreeUI();
+}
+
+function loadTechtreeHtml() {
+  ["m", "a"].forEach((factionId) => {
+    let html = `<div class="origin techtree__active" id="techtree__${factionId}-0" onclick="setTechLevel('${
+      factionId === "m" ? "maya" : "aztec"
+    }', 0);"></div>`;
+    for (const level in polTechtree) {
+      if (level !== "0") {
+        html += `<div class="line"></div>`;
+        html += `<div class="techtree__level" id="techtree__${factionId}-${level}" onclick="setTechLevel('${
+          factionId === "m" ? "maya" : "aztec"
+        }', ${level});">${polTechtree[level].text}</div>`;
+      }
+    }
+    document.getElementById(`techtree-${factionId}`).innerHTML = html;
+  });
+}
+
+function removeActiveTechtreeUI() {
+  let level = 0;
+  while (level <= maxTechtreeLevel) {
+    document
+      .getElementById(`techtree__m-${level}`)
+      .classList.remove("techtree__active");
+    document
+      .getElementById(`techtree__a-${level}`)
+      .classList.remove("techtree__active");
+    level += 1;
+  }
+}
+
+function updateTechtreeUI() {
+  removeActiveTechtreeUI();
+
+  let level = 0;
+  while (level <= mayaTechtreeLevel) {
+    document
+      .getElementById(`techtree__m-${level}`)
+      .classList.add("techtree__active");
+    level += 1;
+  }
+  level = 0;
+  while (level <= aztecTechtreeLevel) {
+    document
+      .getElementById(`techtree__a-${level}`)
+      .classList.add("techtree__active");
+    level += 1;
+  }
+}
+
 function init() {
   reloadStatecounters();
+  loadTechtreeHtml();
 }
 
 init();
