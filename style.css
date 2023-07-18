@@ -21,6 +21,9 @@
   background-color: #f5f5f5;
   padding: 2rem;
   border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
 }
 
 .btn {
@@ -87,9 +90,6 @@
 
 .left {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
 }
 
 .bank__container {
@@ -166,7 +166,6 @@
 
 .center {
   flex: 2;
-  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -189,9 +188,6 @@
 
 .right {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
 }
 
 .map-info__info {
@@ -240,5 +236,52 @@
 }
 
 .techtree {
-  flex: 5;
+  flex: 2.5;
+}
+
+.m-techtree,
+.a-techtree {
+  flex-grow: 1;
+  border: 2px solid;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  align-items: center;
+}
+
+.m-techtree {
+  border-color: #498c01;
+}
+
+.a-techtree {
+  border-color: #d66209;
+}
+
+.origin {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 2rem;
+}
+
+.line {
+  flex-grow: 1;
+  border: 2px solid #555555;
+}
+
+.techtree__level {
+  flex-grow: 2;
+  text-align: center;
+  border-radius: 0.25rem;
+  background-color: #cccccc;
+}
+
+.m-techtree .techtree__active {
+  border: 3px solid #498c01;
+  background-color: #79bc31;
+}
+
+.a-techtree .techtree__active {
+  border: 3px solid #d66209;
+  background-color: #f69239;
 }
