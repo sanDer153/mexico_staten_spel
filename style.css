@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
+/* General styles -- begin */
 * {
   font-family: Poppins, sans-serif;
   margin: 0;
@@ -47,7 +48,9 @@
 .btn-blue:hover {
   background-color: #006969;
 }
+/* General styles -- end */
 
+/* Header styles -- begin */
 .navbar {
   width: 100vw;
   display: flex;
@@ -80,7 +83,9 @@
   flex-direction: column;
   align-items: end;
 }
+/* Header styles -- end */
 
+/* Main section styles -- begin */
 .main {
   display: flex;
   flex-direction: row;
@@ -89,6 +94,7 @@
   max-height: 500px;
 }
 
+/* Left module styles -- begin */
 .left {
   flex: 1;
 }
@@ -164,7 +170,9 @@
 .timer__timer {
   font-size: 2.5rem;
 }
+/* Left module styles -- end */
 
+/* Center module styles -- begin */
 .center {
   flex: 2;
   align-items: center;
@@ -186,7 +194,9 @@
 .map-state.selected {
   fill: darkcyan;
 }
+/* Center module styles -- end */
 
+/* Right module styles -- begin */
 .right {
   flex: 1;
 }
@@ -272,7 +282,10 @@
   border: 1px dashed #aaaaaa;
   height: 2.5rem;
 }
+/* Right module styles -- end */
+/* Main section styles -- end */
 
+/* Lower section styles -- begin */
 .lower {
   flex-grow: 1;
   display: flex;
@@ -281,10 +294,13 @@
   gap: 2rem;
 }
 
+/* Actions module styles -- begin */
 .actions {
   flex: 1;
 }
+/* Actions module styles -- end */
 
+/* Techtree module styles -- begin */
 .techtree {
   flex: 2.5;
 }
@@ -347,3 +363,5 @@
   border: 3px solid #d66209;
   background-color: #f69239;
 }
+/* Techtree module styles -- end */
+/* Lower section styles -- end */
