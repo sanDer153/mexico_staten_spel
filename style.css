@@ -23,7 +23,7 @@
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5em;
+  gap: 1rem;
 }
 
 .btn {
@@ -224,6 +224,55 @@
   background-color: #cccccc;
 }
 
+.referendum {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  background-color: #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.referendum__meter {
+  background-color: #cccccc;
+  display: flex;
+  height: 2rem;
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  border-radius: 0.5rem;
+}
+
+#referendum__meter-a,
+#referendum__meter-m {
+  width: 0;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  transition: width 4.5s;
+}
+
+#referendum__meter-m {
+  justify-content: left;
+  background: #498c01;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+#referendum__meter-a {
+  justify-content: right;
+  background-color: #d66209;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.referendum__meter-line {
+  position: absolute;
+  left: 50%;
+  border: 1px dashed #aaaaaa;
+  height: 2.5rem;
+}
+
 .lower {
   flex-grow: 1;
   display: flex;
@@ -238,7 +287,6 @@
 
 .techtree {
   flex: 2.5;
-  gap: 1.25rem;
 }
 
 .m-techtree,
@@ -248,8 +296,9 @@
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
-  padding: 0 1rem 1rem;
+  padding: 0 1rem;
   align-items: begin;
+  gap: 0.25rem;
 }
 
 .m-techtree {

@@ -11,6 +11,8 @@ const maxTechtreeLevel =
 let mayaTechtreeLevel = 0;
 let aztecTechtreeLevel = 0;
 
+let referendumRunning = false;
+
 const bank = {
   "maya's": {
     hout: 0,
@@ -30,6 +32,10 @@ const bank = {
 
 function capitalized(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 // Get the faction of a certain state
@@ -53,7 +59,7 @@ function removeSelectedState() {
       element.classList.remove("selected");
     }
   );
-  clearMapInfoModule();
+  clearRightModule();
 }
 
 // Clear the info in the map info module
@@ -69,15 +75,23 @@ function clearMapInfoModule() {
     .classList.remove("selected");
 }
 
+function clearRightModule() {
+  clearMapInfoModule();
+  clearReferendumModule();
+}
+
 // Fires when a state is clicked: set blue highlight and load map info module
 function stateClicked(stateId) {
+  if (referendumRunning) return;
   removeSelectedState();
   document.getElementById(stateId).classList.add("selected");
   updateMapInfoModule(stateId);
+  clearReferendumModule();
 }
 
 // Fires when option in faction selector is clicked: update faction of that state
 function factionSelectorClicked(faction) {
+  if (referendumRunning) return;
   let name = document.getElementById("map-info__title").innerHTML;
   if (name === "Selecteer een staat") return;
   const id = name.replaceAll(" ", "-").toLowerCase();
@@ -87,6 +101,7 @@ function factionSelectorClicked(faction) {
   clearMapInfoModule();
   updateMapInfoModule(id);
   reloadStatecounters();
+  clearReferendumModule();
 }
 
 // Update the mapcolor of a certain state
@@ -211,6 +226,7 @@ function reloadStatecounters() {
 }
 
 function setTechLevel(faction, level) {
+  if (referendumRunning) return;
   if (level >= 0 && level <= maxTechtreeLevel) {
     if (faction === "maya") mayaTechtreeLevel = level;
     if (faction === "aztec") aztecTechtreeLevel = level;
@@ -265,6 +281,85 @@ function updateTechtreeUI() {
       .classList.add("techtree__active");
     level += 1;
   }
+}
+
+async function startReferendum() {
+  if (referendumRunning) return;
+  let name = document.getElementById("map-info__title").innerHTML;
+  if (name === "Selecteer een staat") return;
+  const stateId = name.replaceAll(" ", "-").toLowerCase();
+  if (currentMapState[stateId].faction === "none") return;
+
+  referendumRunning = true;
+  clearReferendumModule();
+
+  let mayaPerc;
+  let aztecPerc;
+  const perc = getReferendumPercentages(stateId);
+  if (currentMapState[stateId].faction === "maya's") {
+    mayaPerc = 100 - perc;
+    aztecPerc = perc;
+  } else if (currentMapState[stateId].faction === "azteken") {
+    mayaPerc = perc;
+    aztecPerc = 100 - perc;
+  }
+
+  document.getElementById("referendum__meter-m").style = `width: ${mayaPerc}%;`;
+  document.getElementById(
+    "referendum__meter-a"
+  ).style = `width: ${aztecPerc}%;`;
+  await sleep(5000);
+  document.getElementById("referendum__meter-m").innerHTML = `${mayaPerc}%`;
+  document.getElementById("referendum__meter-a").innerHTML = `${aztecPerc}%`;
+
+  if (mayaPerc > aztecPerc) {
+    document.getElementById(
+      "referendum__winner-text"
+    ).innerHTML = `De winnaar is: <span style="color: #498c01; font-weight: 600">Maya's</span>`;
+    setFaction(stateId, "maya's");
+  } else {
+    document.getElementById(
+      "referendum__winner-text"
+    ).innerHTML = `De winnaar is: <span style="color: #d66209; font-weight: 600">Azteken</span>`;
+    setFaction(stateId, "azteken");
+  }
+  clearMapInfoModule();
+  updateMapInfoModule(stateId);
+
+  referendumRunning = false;
+}
+
+function getReferendumPercentages(stateId) {
+  let takeOverSuccesChance = 0;
+  if (currentMapState[stateId].faction === "maya's") {
+    takeOverSuccesChance =
+      polTechtree[aztecTechtreeLevel].friendlyReferendumChance;
+    takeOverSuccesChance -=
+      polTechtree[mayaTechtreeLevel].enemyReferendumModifier;
+    takeOverSuccesChance = Math.max(0, takeOverSuccesChance);
+  } else if (currentMapState[stateId].faction === "azteken") {
+    takeOverSuccesChance =
+      polTechtree[mayaTechtreeLevel].friendlyReferendumChance;
+    takeOverSuccesChance -=
+      polTechtree[aztecTechtreeLevel].enemyReferendumModifier;
+    takeOverSuccesChance = Math.max(0, takeOverSuccesChance);
+  }
+
+  if (Math.random() < takeOverSuccesChance) {
+    //win
+    return Math.floor((Math.random() / 3 + 0.55) * 100);
+  } else {
+    //loss
+    return Math.floor((Math.random() / 3 + 0.1) * 100);
+  }
+}
+
+function clearReferendumModule() {
+  document.getElementById("referendum__meter-m").style = "";
+  document.getElementById("referendum__meter-a").style = "";
+  document.getElementById("referendum__meter-m").innerHTML = "";
+  document.getElementById("referendum__meter-a").innerHTML = "";
+  document.getElementById("referendum__winner-text").innerHTML = "";
 }
 
 function init() {
