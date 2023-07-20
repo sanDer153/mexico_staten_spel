@@ -107,10 +107,9 @@
   column-gap: 0.5rem;
   grid-template-areas:
     ". m-header a-header"
+    "gras m-gras a-gras"
     "hout m-hout a-hout"
-    "graan m-graan a-graan"
-    "steen m-steen a-steen"
-    "kippen m-kippen a-kippen"
+    "geiten m-geiten a-geiten"
     "goud m-goud a-goud"
     ". m-footer a-footer";
 }

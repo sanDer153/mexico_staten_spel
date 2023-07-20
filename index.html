@@ -41,6 +41,37 @@
             >
               Azteken
             </div>
+            <div style="grid-area: gras">Gras:</div>
+            <div class="bank__m" style="grid-area: m-gras">
+              <div
+                class="bank__resource-btn"
+                onclick="decrementResource(`maya's`, 'gras')"
+              >
+                -
+              </div>
+              <span id="bank__m-gras">0</span>
+              <div
+                class="bank__resource-btn"
+                onclick="incrementResource(`maya's`, 'gras')"
+              >
+                +
+              </div>
+            </div>
+            <div class="bank__a" style="grid-area: a-gras">
+              <div
+                class="bank__resource-btn"
+                onclick="decrementResource('azteken', 'gras')"
+              >
+                -
+              </div>
+              <span id="bank__a-gras">0</span>
+              <div
+                class="bank__resource-btn"
+                onclick="incrementResource('azteken', 'gras')"
+              >
+                +
+              </div>
+            </div>
             <div style="grid-area: hout">Hout:</div>
             <div class="bank__m" style="grid-area: m-hout">
               <div
@@ -72,95 +103,33 @@
                 +
               </div>
             </div>
-            <div style="grid-area: graan">Graan:</div>
-            <div class="bank__m" style="grid-area: m-graan">
+            <div style="grid-area: geiten">Geiten:</div>
+            <div class="bank__m" style="grid-area: m-geiten">
               <div
                 class="bank__resource-btn"
-                onclick="decrementResource(`maya's`, 'graan')"
+                onclick="decrementResource(`maya's`, 'geiten')"
               >
                 -
               </div>
-              <span id="bank__m-graan">0</span>
+              <span id="bank__m-geiten">0</span>
               <div
                 class="bank__resource-btn"
-                onclick="incrementResource(`maya's`, 'graan')"
+                onclick="incrementResource(`maya's`, 'geiten')"
               >
                 +
               </div>
             </div>
-            <div class="bank__a" style="grid-area: a-graan">
+            <div class="bank__a" style="grid-area: a-geiten">
               <div
                 class="bank__resource-btn"
-                onclick="decrementResource('azteken', 'graan')"
+                onclick="decrementResource('azteken', 'geiten')"
               >
                 -
               </div>
-              <span id="bank__a-graan">0</span>
+              <span id="bank__a-geiten">0</span>
               <div
                 class="bank__resource-btn"
-                onclick="incrementResource('azteken', 'graan')"
-              >
-                +
-              </div>
-            </div>
-            <div style="grid-area: steen">Steen:</div>
-            <div class="bank__m" style="grid-area: m-steen">
-              <div
-                class="bank__resource-btn"
-                onclick="decrementResource(`maya's`, 'steen')"
-              >
-                -
-              </div>
-              <span id="bank__m-steen">0</span>
-              <div
-                class="bank__resource-btn"
-                onclick="incrementResource(`maya's`, 'steen')"
-              >
-                +
-              </div>
-            </div>
-            <div class="bank__a" style="grid-area: a-steen">
-              <div
-                class="bank__resource-btn"
-                onclick="decrementResource('azteken', 'steen')"
-              >
-                -
-              </div>
-              <span id="bank__a-steen">0</span>
-              <div
-                class="bank__resource-btn"
-                onclick="incrementResource('azteken', 'steen')"
-              >
-                +
-              </div>
-            </div>
-            <div style="grid-area: kippen">Kippen:</div>
-            <div class="bank__m" style="grid-area: m-kippen">
-              <div
-                class="bank__resource-btn"
-                onclick="decrementResource(`maya's`, 'kippen')"
-              >
-                -
-              </div>
-              <span id="bank__m-kippen">0</span>
-              <div
-                class="bank__resource-btn"
-                onclick="incrementResource(`maya's`, 'kippen')"
-              >
-                +
-              </div>
-            </div>
-            <div class="bank__a" style="grid-area: a-kippen">
-              <div
-                class="bank__resource-btn"
-                onclick="decrementResource('azteken', 'kippen')"
-              >
-                -
-              </div>
-              <span id="bank__a-kippen">0</span>
-              <div
-                class="bank__resource-btn"
-                onclick="incrementResource('azteken', 'kippen')"
+                onclick="incrementResource('azteken', 'geiten')"
               >
                 +
               </div>
@@ -532,6 +501,8 @@
     </div>
     <script src="config.js"></script>
     <script src="checkConfig.js"></script>
+    <script src="utils.js"></script>
+    <script src="UI.js"></script>
     <script src="index.js"></script>
   </body>
 </html>

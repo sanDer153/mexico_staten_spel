@@ -15,28 +15,18 @@ let referendumRunning = false;
 
 const bank = {
   "maya's": {
+    gras: 0,
     hout: 0,
-    graan: 0,
-    steen: 0,
-    kippen: 0,
+    geiten: 0,
     goud: 0,
   },
   azteken: {
+    gras: 0,
     hout: 0,
-    graan: 0,
-    steen: 0,
-    kippen: 0,
+    geiten: 0,
     goud: 0,
   },
 };
-
-function capitalized(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 // Get the faction of a certain state
 function getFaction(stateId) {
@@ -138,15 +128,13 @@ function updateMapInfoModule(stateId) {
 
 // reload the ui for the resourcebank
 function reloadResourceBank() {
+  document.getElementById("bank__m-gras").innerHTML = bank["maya's"].gras;
   document.getElementById("bank__m-hout").innerHTML = bank["maya's"].hout;
-  document.getElementById("bank__m-graan").innerHTML = bank["maya's"].graan;
-  document.getElementById("bank__m-steen").innerHTML = bank["maya's"].steen;
-  document.getElementById("bank__m-kippen").innerHTML = bank["maya's"].kippen;
+  document.getElementById("bank__m-geiten").innerHTML = bank["maya's"].geiten;
   document.getElementById("bank__m-goud").innerHTML = bank["maya's"].goud;
+  document.getElementById("bank__a-gras").innerHTML = bank["azteken"].gras;
   document.getElementById("bank__a-hout").innerHTML = bank["azteken"].hout;
-  document.getElementById("bank__a-graan").innerHTML = bank["azteken"].graan;
-  document.getElementById("bank__a-steen").innerHTML = bank["azteken"].steen;
-  document.getElementById("bank__a-kippen").innerHTML = bank["azteken"].kippen;
+  document.getElementById("bank__a-geiten").innerHTML = bank["azteken"].geiten;
   document.getElementById("bank__a-goud").innerHTML = bank["azteken"].goud;
 }
 
@@ -362,7 +350,14 @@ function clearReferendumModule() {
   document.getElementById("referendum__winner-text").innerHTML = "";
 }
 
+function updateWholeMap() {
+  for (const stateId in currentMapState) {
+    updateMap(stateId, currentMapState[stateId].faction);
+  }
+}
+
 function init() {
+  updateWholeMap();
   reloadStatecounters();
   loadTechtreeHtml();
 }
