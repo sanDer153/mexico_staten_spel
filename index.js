@@ -1,10 +1,11 @@
-const currentMapState = initialMapState;
+let currentMapState = JSON.parse(JSON.stringify(initialMapState));
 
 let mayaStatecount = 0;
 let aztecStatecount = 0;
 
 let timerRunning = false;
 let timerStart;
+let timeToNextTurn;
 
 const maxTechtreeLevel =
   Object.keys(polTechtree)[Object.keys(polTechtree).length - 1];
@@ -13,7 +14,7 @@ let aztecTechtreeLevel = 0;
 
 let referendumRunning = false;
 
-const bank = {
+let bank = {
   "maya's": {
     gras: 0,
     hout: 0,
@@ -60,7 +61,7 @@ function toggleTimer() {
         distance = 0;
         turn();
       }
-      let timeToNextTurn = timeBetweenTurns - distance;
+      timeToNextTurn = timeBetweenTurns - distance;
 
       let minutes = Math.floor(timeToNextTurn / (1000 * 60));
       let seconds = Math.floor((timeToNextTurn % (1000 * 60)) / 1000);
@@ -83,8 +84,7 @@ function mapStateClickHandler(stateId) {
   if (referendumRunning) return;
   removeSelectedState();
   document.getElementById(stateId).classList.add("selected");
-  loadMapInfoModule(stateId);
-  clearReferendumModule();
+  reloadRightModule(stateId);
 }
 
 // fires when the background of the map is clicked
@@ -185,9 +185,43 @@ function distributeResources() {
   reloadResourceBank();
 }
 
+// Save data from current state to local browser storage
+function saveData() {
+  localStorage.setItem("mapState", JSON.stringify(currentMapState));
+  localStorage.setItem("bank", JSON.stringify(bank));
+  localStorage.setItem("timerRunning", timerRunning);
+  localStorage.setItem("timeToNextTurn", timeToNextTurn);
+  localStorage.setItem("mayaTechtreeLevel", mayaTechtreeLevel);
+  localStorage.setItem("aztecTechtreeLevel", aztecTechtreeLevel);
+}
+
+function loadData() {
+  if (localStorage.getItem("mapState") == null) return;
+  currentMapState = JSON.parse(localStorage.getItem("mapState"));
+  updateWholeMap();
+  reloadStatecounters();
+  bank = JSON.parse(localStorage.getItem("bank"));
+  reloadResourceBank();
+  if (localStorage.getItem("timerRunning") === "true") {
+    timerRunning = false;
+    toggleTimer();
+    timerStart =
+      new Date().getTime() -
+      (timeBetweenTurns - Number(localStorage.getItem("timeToNextTurn")));
+  }
+  mayaTechtreeLevel = Number(localStorage.getItem("mayaTechtreeLevel"));
+  aztecTechtreeLevel = Number(localStorage.getItem("aztecTechtreeLevel"));
+  loadTechtreeUI();
+}
+
+function clearData() {
+  localStorage.clear();
+}
+
 // fires every turn
 function turn() {
   distributeResources();
+  saveData();
 }
 
 // fires when the file is loaded
@@ -195,6 +229,13 @@ function init() {
   updateWholeMap();
   reloadStatecounters();
   loadTechtreeHtml();
+}
+
+window.onbeforeunload = closingCode;
+function closingCode() {
+  saveData();
+
+  return null;
 }
 
 init();

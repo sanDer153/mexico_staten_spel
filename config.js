@@ -2,7 +2,7 @@ const resources = ["gras", "hout", "geiten", "goud"];
 const factions = ["none", "maya's", "azteken"];
 
 // time in millis --> 5min = 300000
-const timeBetweenTurns = 10000;
+const timeBetweenTurns = 300000;
 
 // Config voor politieke technologie boom
 // 0 : Standaard niveau bij het begin al geactiveerd

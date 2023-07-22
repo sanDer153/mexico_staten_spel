@@ -178,7 +178,22 @@
             >
               Start
             </div>
-            <div class="btn">Delete back-up files</div>
+            <div class="backup-btns">
+              <div
+                class="btn"
+                style="flex: 1; border-radius: 5rem 1rem 1rem 5rem"
+                onclick="loadData();"
+              >
+                Load back-up
+              </div>
+              <div
+                class="btn"
+                style="flex: 1; border-radius: 1rem 5rem 5rem 1rem"
+                onclick="clearData();"
+              >
+                Clear back-up
+              </div>
+            </div>
           </div>
         </div>
         <div class="center module" onclick="mapBGClickHandler()">
@@ -484,7 +499,6 @@
       </div>
       <div class="divider"></div>
       <div class="lower">
-        <div class="actions module"></div>
         <div class="techtree module">
           <h2>Politieke Techtree</h2>
           <div class="m-techtree">
