@@ -74,6 +74,14 @@ function toggleTimer() {
 
       if (!timerRunning) {
         clearInterval(timer);
+        let minutes = Math.floor(timeBetweenTurns / (1000 * 60));
+        let seconds = Math.floor((timeBetweenTurns % (1000 * 60)) / 1000);
+
+        formattedSeconds = ("0" + seconds).slice(-2); //Puts 0 in front if seconds is 1 digit
+
+        document.getElementById(
+          "timer"
+        ).innerHTML = `${minutes}:${formattedSeconds}`;
       }
     }, 500);
   }
@@ -195,6 +203,7 @@ function saveData() {
   localStorage.setItem("aztecTechtreeLevel", aztecTechtreeLevel);
 }
 
+// load data from local browser storage
 function loadData() {
   if (localStorage.getItem("mapState") == null) return;
   currentMapState = JSON.parse(localStorage.getItem("mapState"));
@@ -214,6 +223,7 @@ function loadData() {
   loadTechtreeUI();
 }
 
+// clear browser storage
 function clearData() {
   localStorage.clear();
 }
@@ -231,6 +241,7 @@ function init() {
   loadTechtreeHtml();
 }
 
+// fires before window closes
 window.onbeforeunload = closingCode;
 function closingCode() {
   saveData();
