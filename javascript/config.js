@@ -30,11 +30,6 @@ const polTechtree = {
     friendlyReferendumChance: 0.35,
     enemyReferendumModifier: 0.1,
   },
-  3: {
-    text: "Niveau 3",
-    friendlyReferendumChance: 0.4,
-    enemyReferendumModifier: 0.15,
-  },
   4: {
     text: "Niveau 4",
     friendlyReferendumChance: 0.45,
